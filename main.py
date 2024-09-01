@@ -50,38 +50,39 @@ if __name__ == "__main__":
 
     with tab_guide:
         st.header("作业介绍")
-        st.markdown("要求使用python开源框架streamlit构建一个静态/可交互的数据信息创意展示页面。Streamlit是一个专门用于数据科学展示的开源框架，\
+        st.markdown("要求使用python开源框架**streamlit**构建一个静态/可交互的数据信息创意展示页面。Streamlit是一个专门用于数据科学展示的开源框架，\
                     优点是无需深入学习复杂的前端开发技术也可轻松地创建交互式的Web应用。其渲染逻辑简单，每次刷新由上至下执行符合条件的所有语句，\
                     用近似“搭积木”的形式简单拼装出一个完整页面。")
         st.header("作业要求")
-        st.markdown("test")
+        st.markdown('<h1 style="color: #ff0000;">#TODO</h1>', unsafe_allow_html=True)
         st.header("环境配置")
         st.markdown("- **Visual Studio Code**：在电脑上安装VSCode以编辑和运行代码。")
         st.markdown("- **Python**：在电脑上安装Python解释器。")
         st.markdown("- **参考**：https://www.sohu.com/a/769613173_121124362")
         st.header("上手教程")
         st.subheader("安装依赖")
-        st.markdown("在StreamlitDemo文件夹下打开终端，运行以下代码，确保依赖已满足：")
+        st.markdown("在**ISHW-Demo**文件夹下打开终端，运行以下代码，确保依赖已满足：")
         st.code("pip install -r requirements.txt")
         st.subheader("文件结构")
         st.markdown("- main.py为主程序，所有用于页面组件的Python代码均在其中编写。")
         st.markdown("- /data文件夹中存放了数据文件，如课程信息和个人头像等。")
         st.markdown("- /.streamlit文件夹存放了部分配置，无需修改。")
         st.subheader("本地运行")
-        st.markdown("在StreamlitDemo文件夹下打开终端，运行以下代码，即可本地运行Streamlit：")
+        st.markdown("在**ISHW-Demo**文件夹下打开终端，运行以下代码，即可本地运行**Streamlit**：")
         st.code("streamlit run main.py")
         st.markdown("可以通过浏览器输入 http://localhost:8501/ 查看当前页面，内容与此处完全相同。此后即可通过本地运行查看修改代码后的效果。")
         st.subheader("组件使用")
         st.markdown("**Streamlit官方组件文档**：https://docs.streamlit.io/")
         st.markdown("**中文版**：https://blog.csdn.net/weixin_44458771/article/details/135495928")
         st.header("快速部署")
-        st.markdown("开发完成之后，要通过应用部署将编写好的软件放到服务器上，让其他人可以通过互联网或局域网来使用这个软件。其他人无法通过localhost来访问你开发好的页面，\
-                    但将其部署在test之后，大家就都可以访问了。")
+        st.markdown("开发完成之后，要通过应用部署将编写好的软件放到服务器上，让其他人可以通过互联网或局域网来使用这个软件。如当前展示页面，其他人无法通过localhost来访问，\
+                    但将其部署之后，大家就都可以通过 https://ishw-demo.streamlit.app/ 来访问了。")
         st.markdown("Streamlit提供了云服务器和方便的部署方式，可以快速地部署你的页面。")
         st.subheader("部署流程")
-        st.markdown("- 1.注册**Github**账户，将完整的代码和数据文件上传至一个新的Github仓库，需保证主文件和配置文件位置与初始一致。")
-        st.markdown("- 2.前往Streamlit官网 https://streamlit.io/ 注册账号，按照 https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app \
-                    流程指引，链接Github仓库发布应用。")
+        st.markdown("- 1.注册**Github**账户，将完整的代码和数据文件上传至一个新的**Github**仓库，需保证主文件和配置文件位置与初始一致。")
+        st.markdown("- 2.前往**Streamlit**官网 https://streamlit.io/ 注册账号，按照 https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app \
+                    流程指引，链接**Github**仓库发布应用。")
+        st.markdown("- 3.访问你的页面，检验功能是否运行正常，如果需要做出改动，仍在本地修改代码后上传至**Github**，然后在**Streamlit**的App管理界面Reboot即可。")
 
 
     with tab_info:
