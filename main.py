@@ -1,62 +1,46 @@
-"""
- Decheng Xu's Streamlit demo for CSE 
- If have any problems, please contact by 
- WeChat: 18918517305 or E-mail: xdc24@mails.tsinghua.edu.cn
-"""
+#  Decheng Xu's Streamlit demo for CSE 
+#  If have any problems, please contact by 
+#  WeChat: 18918517305 or E-mail: xdc24@mails.tsinghua.edu.cn
 
-"""
- 导入需要用的程序包 
- import necessary packages
-"""
+#  导入需要用的程序包 
+#  import necessary packages
 import streamlit as st
 import pandas as pd
 import json
 
-"""
- 预先定义一些课表相关的元数据 
- define some meta-data for my timetable
-"""
+#  预先定义一些课表相关的元数据 
+#  define some meta-data for my timetable
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 periods = ['第1节\n08:00-09:35', '第2节\n09:50-12:15', '第3节\n13:30-15:05', '第4节\n15:20-16:55', '第5节\n17:05-18:40', '第6节\n19:20-21:45']
 
-"""
- 从csv文件中读取课程数据 
- read courses data from csv file
-"""
+#  从csv文件中读取课程数据 
+#  read courses data from csv file
 df = pd.read_csv('data/course_data.csv') # 这里存放了我选的课程
 df_timetable = pd.DataFrame(index=periods, columns=days) # 这里初始化一个空的课表，之后把课程填进去
 df_owncourse = pd.read_csv('data/own_course.csv') # 这里存放了本院开设的课程
 
-"""
- 数据格式的预处理函数，可以无视
- a pre-processing function, ignore this
-"""
+#  数据格式的预处理函数，可以无视
+#  a pre-processing function, ignore this
 def remove_dollarsigns(x):
     if isinstance(x, str):
         return x.strip("$")
     return x
 
-"""
- “查看”按钮的响应函数，修改了系统中储存的当前查看的课程序号
- callback function of "view" button, which changes the system-stored value of course number user is viewing
-"""
+#  “查看”按钮的响应函数，修改了系统中储存的当前查看的课程序号
+#  callback function of "view" button, which changes the system-stored value of course number user is viewing
 def call_back_viewCourseDetail(index):
     st.session_state.detail_index = index
 
-"""
- 使用循环，将我选的课程依次放进课表的对应位置
- using a loop to fill my courses in their proper position of the timetable
-"""
+#  使用循环，将我选的课程依次放进课表的对应位置
+#  using a loop to fill my courses in their proper position of the timetable
 for _, course in df.iterrows():
     c_period = course['上课时间'].strip("$")
     c_period = c_period.split("-")
     c_info = f"{course['课程名']}"
     df_timetable.at[periods[int(c_period[1]) - 1], days[int(c_period[0]) - 1]] = c_info
 
-"""
- 预处理读取的数据
- pre-processing the read data
-"""
+#  预处理读取的数据
+#  pre-processing the read data
 df_owncourse['课程编号'] = df_owncourse['课程编号'].apply(remove_dollarsigns)
 df_owncourse['上课时间'] = df_owncourse['上课时间'].apply(remove_dollarsigns)
 df_owncourse['课序号'] = df_owncourse['课序号'].astype(str)
@@ -67,11 +51,9 @@ df_timetable.fillna("", inplace=True) # 把课表空着的位置变成空格，�
 df_owncourse.index += 1 # 院系课程的序号会从1开始而不是0
 
 
-"""
- 主要负责绘制界面的部分，此后的代码在每次页面有变化时都会重新运行一次，在当时的状态会运行到的语句效果会出现在页面上
- main function to draw the page, code from here will rerun once something on page is changing, 
- statements executed will show their content on the page
-"""
+#  主要负责绘制界面的部分，此后的代码在每次页面有变化时都会重新运行一次，在当时的状态会运行到的语句效果会出现在页面上
+#  main function to draw the page, code from here will rerun once something on page is changing, 
+#  statements executed will show their content on the page
 if __name__ == "__main__":
 
     st.set_page_config(
@@ -86,17 +68,18 @@ if __name__ == "__main__":
 
     tab_guide, tab_info, tab_timetable, tab_owncourse = st.tabs(["作业介绍","个人主页", "整体课表", "课程资源"]) # 做四个可以切换的栏位
 
-    """
-    作业介绍栏，这里就是直接把内容一行行堆上去
-    hw introduction tab, just pile all lines here
-    """
+    # 作业介绍栏，这里就是直接把内容一行行堆上去
+    # hw introduction tab, just pile all lines here
     with tab_guide:
         st.header("作业介绍")
         st.markdown("要求使用python开源框架**streamlit**构建一个静态/可交互的数据信息创意展示页面。Streamlit是一个专门用于数据科学展示的开源框架，\
                     优点是无需深入学习复杂的前端开发技术也可轻松地创建交互式的Web应用。其渲染逻辑简单，每次刷新由上至下执行符合条件的所有语句，\
                     用近似“搭积木”的形式简单拼装出一个完整页面。")
         st.header("作业要求")
-        st.markdown('<h1 style="color: #ff0000;">#TODO</h1>', unsafe_allow_html=True)
+        st.markdown("- 页面信息可以提现个人创意")
+        st.markdown("- 设计符合提出的需求和原型")
+        st.markdown("- 内容简洁美观呈现方式合理")
+        st.markdown("- 独立完成")
         st.header("环境配置")
         st.markdown("- **Visual Studio Code**：在电脑上安装VSCode以编辑和运行代码。")
         st.markdown("- **Python**：在电脑上安装Python解释器。")
@@ -126,10 +109,8 @@ if __name__ == "__main__":
                     流程指引，链接**Github**仓库发布应用。")
         st.markdown("- 3.访问你的页面，检验功能是否运行正常，如果需要做出改动，仍在本地修改代码后上传至**Github**，然后在**Streamlit**的App管理界面Reboot即可。")
 
-    """
-    个人信息栏，分了两列把内容堆上去
-    personal info tab, pile all lines in 2 colomns
-    """
+    # 个人信息栏，分了两列把内容堆上去
+    # personal info tab, pile all lines in 2 colomns
     with tab_info:
         st.subheader("个人信息")
         col1, col2 = st.columns([2,5]) # col1是头像，col2是其他信息
@@ -158,10 +139,8 @@ if __name__ == "__main__":
                  我平时最爱做的事情就是写程序，我学习过包括C、C++、Java、Python等多种编程语言以及各种信息领域前沿技术。\
                  目前我选修了刘璘老师开设的创意软件课程，期待与大家在课堂上见面，度过一段开心的时光。也希望大家在课余时间多找我玩。")
 
-    """
-    学期课表栏，这里把之前填好的课表展示了一下
-    timetable tab, show the filled timetable
-    """
+    # 学期课表栏，这里把之前填好的课表展示了一下
+    # timetable tab, show the filled timetable
     with tab_timetable:
         st.subheader("学期课表")
         st.dataframe(df_timetable, use_container_width=True) # 这样就可以展示一个dataframe
@@ -174,10 +153,8 @@ if __name__ == "__main__":
             mime='text/csv',
         ) # 下载按钮
 
-    """
-    本院开课栏，这里把读取的本院课程展示了一下
-    own course tab, show all courses of THSS
-    """
+    # 本院开课栏，这里把读取的本院课程展示了一下
+    # own course tab, show all courses of THSS
     with tab_owncourse:
         st.subheader("本院开课")
         st.dataframe(df_owncourse[['课程名', '课程编号', '课序号', '学分', '任课教师', '上课时间']], use_container_width=True, height=400) # 这样就可以展示一个dataframe
