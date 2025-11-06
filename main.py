@@ -7,6 +7,7 @@
 import streamlit as st
 import pandas as pd
 import json
+from zhipuai import ZhipuAI 
 
 #  预先定义一些课表相关的元数据 
 #  define some meta-data for my timetable
